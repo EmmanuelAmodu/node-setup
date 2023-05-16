@@ -1,0 +1,11 @@
+[Unit]
+Description=Go Ethereum client
+
+[Service]
+User=root
+Type=simple
+Restart=always
+ExecStart=/usr/bin/geth --networkid 7484 --datadir /root/raba.network/data --port 30303 --ipcdisable --syncmode full --allow-insecure-unlock --http=true --http.corsdomain "*" --http.port 8545 --http.rpcprefix "/" --http.addr "$NODE_IP" --unlock 0x$ACCOUNT_ADDRESS --password /root/raba.network/password.txt --mine --http.api personal,admin,clique,eth,net,web3,miner,txpool,debug --ws=true --ws.addr 0.0.0.0 --ws.port 8546 --ws.origins '*' --ws.api personal,admin,eth,net,web3,miner,txpool,debug --maxpeers 25 --miner.etherbase 0x$ACCOUNT_ADDRESS --miner.gasprice 0x3B9ACA00 --miner.gaslimit 9999999
+
+[Install]
+WantedBy=default.target
