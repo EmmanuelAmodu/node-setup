@@ -1,5 +1,7 @@
 git clone https://github.com/EmmanuelAmodu/node-setup.git
+mv node-setup/genesis.json raba.network/
 mv node-setup/bootnodes.txt raba.network/
+geth --datadir ./raba.network/data init ./raba.network/genesis.json
 cd /etc/systemd/system
 export NODE_IP=$(hostname -I | awk '{print $1}')
 export ACCOUNT_ADDRESS=$(geth --datadir /root/raba.network/data account list 2>/dev/null |  awk -F '[{}]' '{print $2}')
@@ -10,3 +12,5 @@ systemctl daemon-reload
 systemctl enable geth.service
 systemctl start geth.service
 systemctl status geth.service
+cd ~
+rm -rf node-setup
